@@ -4,12 +4,49 @@ const rr = 4;
 
 const calcularCrc = (g, d, r) => {
 
-    let numerador = armarNumerador(d, r);
-    console.log(numerador);
+    let numerador = armarNumerador(d, r).split('');
+    const denominador = g.split('');
+    let terminado = true;
+    let result = new Array();
+    result.push(1);  
+    let numeradorResta = numerador.join('').substring(0, denominador.length).split('');
+    console.log(numeradorResta);
+    while(terminado) {
+        
 
-    if(numerador === '100111100010000'){
-        console.log('Sii');
+        for(let i = 0; i < numeradorResta.length; i++) {
+            numerador[i] = '';
+            if(numeradorResta[i] === denominador[i]){
+                numeradorResta[i] = '';
+            } else {
+                numeradorResta[i] = denominador[i];
+            } 
+
+        }
+
+        numerador = numerador.join('').split('');
+        numeradorResta = numeradorResta.join('').split('');
+
+        if(numerador.length === 0){
+            terminado = false;
+        } else {
+            numeradorResta.push(numerador[0]);
+            numerador[0] = '';
+            numerador = numerador.join('').split('');
+            while(numeradorResta.length < denominador.length && numerador.length !== 0){
+                numeradorResta.push(numerador[0]); 
+                numerador[0] = '';
+                numerador = numerador.join('').split('');
+                result.push(0);
+            }
+
+
+        }
+        console.log('cwece' + numeradorResta);
+        result.push(1);
+        
     }
+    console.log(result);
 
 }
 
