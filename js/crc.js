@@ -1,39 +1,58 @@
-const gg = '10011';
-const dd = '10011110001';
-const rr = 4;
+
+const limpiarCerosIzquierda = arrayLimpiar => {
+
+    for(let i = 0; i < arrayLimpiar.length; i++) {
+
+        if(arrayLimpiar[i] === '1'){
+            break;
+        } else {
+            arrayLimpiar[i] = '';
+        }
+    }
+
+    return arrayLimpiar.join('').split('');
+}
 
 const calcularCrc = (g, d, r) => {
 
     let numerador = armarNumerador(d, r).split('');
     const denominador = g.split('');
-    let terminado = true;
+    let sinTerminar = true;
     let result = new Array();
     result.push(1);  
     let numeradorResta = numerador.join('').substring(0, denominador.length).split('');
-    console.log(numeradorResta);
-    while(terminado) {
-        
+    while(sinTerminar) {
 
-        for(let i = 0; i < numeradorResta.length; i++) {
-            numerador[i] = '';
+        for(let i = 0; i < denominador.length; i++) {
+
             if(numeradorResta[i] === denominador[i]){
-                numeradorResta[i] = '';
+                numeradorResta[i] = '0';
             } else {
-                numeradorResta[i] = denominador[i];
-            } 
+                numeradorResta[i] = '1';
+            }
+
+            numerador[i] = '';
 
         }
 
-        numerador = numerador.join('').split('');
-        numeradorResta = numeradorResta.join('').split('');
+        console.log(numerador);
 
+        numerador = numerador.join('').split('');
+        
+        console.log(numerador);
+        let arrayClean = limpiarCerosIzquierda(numeradorResta);
+        numeradorResta = arrayClean;
         if(numerador.length === 0){
-            terminado = false;
+            sinTerminar = false;
         } else {
+            console.log(numerador);
             numeradorResta.push(numerador[0]);
             numerador[0] = '';
             numerador = numerador.join('').split('');
-            while(numeradorResta.length < denominador.length && numerador.length !== 0){
+            console.log(numerador);
+            console.log('....'+numeradorResta);
+            
+            while(numeradorResta.length < denominador.length && numerador.length > 0){
                 numeradorResta.push(numerador[0]); 
                 numerador[0] = '';
                 numerador = numerador.join('').split('');
@@ -42,13 +61,24 @@ const calcularCrc = (g, d, r) => {
 
 
         }
-        console.log('cwece' + numeradorResta);
+        console.log('desdepure   -  ' + numerador);
+
+
         result.push(1);
         
+    }
+
+    if(result.join('') === '10000110100'){
+        console.log('Siiiiii! Hijueputa!!!!!');
     }
     console.log(result);
 
 }
+
+
+const gg = '10011';
+const dd = '10011110001';
+const rr = 4;
 
 
 const armarNumerador = (primero, segundo) => { 
@@ -58,11 +88,13 @@ const armarNumerador = (primero, segundo) => {
     }
     return primero + concatenar.join('');
 }
+
 calcularCrc(gg, dd, rr);
 const btn_calcular = document.getElementById('btn_calcular');
 btn_calcular.addEventListener('click', () => {
     calcularCrc(gg, dd, rr);
 });
+
 
 
 
