@@ -90,6 +90,7 @@ const verificarReceptor = (TX, G_VERIFICAR) => {
 
 
 const calcularCrc = (g, d, r) => {
+
     let numerador = armarNumerador(d, r).split('');
     const denominador = g.split('');
     let sinTerminar = true;
@@ -101,7 +102,7 @@ const calcularCrc = (g, d, r) => {
     for(let i = 0; i < denominador.length; i++) {
         numerador[i] = '';
     }
-
+    crcFinal = 
     numerador = numerador.join('').split('');
     while(sinTerminar) {
 
@@ -115,7 +116,7 @@ const calcularCrc = (g, d, r) => {
 
         }
 
-
+        crcFinal = numeradorResta;
         numerador = numerador.join('').split('');
         console.log(numeradorResta);
         let arrayClean = limpiarCerosIzquierda(numeradorResta);
@@ -151,7 +152,9 @@ const calcularCrc = (g, d, r) => {
         console.log('Siiiiii! Hijueputa!!!!!');
     }
     console.log(result);
-    console.log(' ');   
+    console.log(' '); 
+    
+    // crc_fin = crcFinal.join('');
 }
 
 
