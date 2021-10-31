@@ -21,6 +21,18 @@ const calcularCrc = (g, d, r) => {
     let result = new Array();
     result.push(1);  
     let numeradorResta = numerador.join('').substring(0, denominador.length).split('');
+    for(let i = 0; i < denominador.length; i++) {
+
+        // if(numeradorResta[i] === denominador[i]){
+        //     numeradorResta[i] = '0';
+        // } else {
+        //     numeradorResta[i] = '1';
+        // }
+
+        numerador[i] = '';
+
+    }
+    numerador = numerador.join('').split('');
     while(sinTerminar) {
 
         for(let i = 0; i < denominador.length; i++) {
@@ -31,28 +43,25 @@ const calcularCrc = (g, d, r) => {
                 numeradorResta[i] = '1';
             }
 
-            numerador[i] = '';
+            // numerador[i] = '';
 
         }
 
-        console.log(numerador);
 
         numerador = numerador.join('').split('');
         
-        console.log(numerador);
         let arrayClean = limpiarCerosIzquierda(numeradorResta);
         numeradorResta = arrayClean;
         if(numerador.length === 0){
             sinTerminar = false;
+            break;
         } else {
-            console.log(numerador);
+
             numeradorResta.push(numerador[0]);
             numerador[0] = '';
             numerador = numerador.join('').split('');
-            console.log(numerador);
-            console.log('....'+numeradorResta);
             
-            while(numeradorResta.length < denominador.length && numerador.length > 0){
+            while(numeradorResta.length < denominador.length){
                 numeradorResta.push(numerador[0]); 
                 numerador[0] = '';
                 numerador = numerador.join('').split('');
@@ -61,14 +70,14 @@ const calcularCrc = (g, d, r) => {
 
 
         }
-        console.log('desdepure   -  ' + numerador);
 
-
-        result.push(1);
+        if(numeradorResta[numeradorResta.length - 1] !== undefined) {
+            result.push(1);
+        }
         
     }
 
-    if(result.join('') === '10000110100'){
+    if(result.join('') === '10001111'){
         console.log('Siiiiii! Hijueputa!!!!!');
     }
     console.log(result);
@@ -76,9 +85,18 @@ const calcularCrc = (g, d, r) => {
 }
 
 
-const gg = '10011';
-const dd = '10011110001';
-const rr = 4;
+// const gg = '10011';
+// const dd = '10011110001';
+// const rr = 4;
+// const gg = '100001';
+// const dd = '111111110011001';
+// const rr = 5;
+// const gg = '100001';
+// const dd = '10000001110011001';
+// const rr = 5;
+const gg = '1001';
+const dd = '10011110';
+const rr = 3;
 
 
 const armarNumerador = (primero, segundo) => { 
