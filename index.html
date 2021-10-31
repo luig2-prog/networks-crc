@@ -5,12 +5,99 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="styles/mystyle.css">
 </head>
 <body>
-    <button id="btn_calcular">Calcular</button>
+
+    <div class="container z-depth-2 ">
+        <div class="row ">
+            <div class="col s12 center z-depth-2 title">
+                <div>CALCULO DE CRC</div>
+            </div>
+            
+            <div class="col s12 center z-depth-3 center">
+               <div class="container_form_crc container ">
+
+                <div class="z-depth-2">
+                    <div class="row contenedor_form">
+                        <div class="col s12"><p>EMISOR</p></div>
+                        <div class="col s12 m4 l2"><p></p></div>
+                        <div class="col s12 m4 l8"><p>
+                            <div class="col s12 center"></div>
+                            <div class="input-field col s12">
+                                <input id="D_input" type="text" class="validate">
+                                <label for="D_input">Ingrese el valor de D</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="G_input" type="text" class="validate">
+                                <label for="G_input">Ingrese el valor de G</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="R_input" type="text" class="validate">
+                                <label for="R_input">Ingrese el valor de R</label>
+                            </div>
+                            <div class="container_btn col s12" id="btn_calcular">
+                                <div class="cont_span">
+                                    <span>GENERAR CRC</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m4 l2"><p></p>
+                        </div>
+                    
+                        <div class="col s12 separador_padding"><p class="separador"></p></div>
+                        <div class="col s12 m4 l2"><p></p></div>
+                        <div class="col s12 m4 l8"><p>
+                            <div class="col s12 center"></div>
+                            <div class="input-field col s12" id="evento">
+                                <input id="CRC_input" type="text" class="validate">
+                                <label for="CRC_input" id="laber_crc">CRC</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="TX_input" type="text" class="validate">
+                                <label for="TX_input" id="TX_label">TRAMA (TX)</label>
+                            </div>
+                            <div class="container_btn col s12" id="enviar_validar">
+                                <div class="cont_span">
+                                    <span>ENVIAR</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m4 l2"><p></p>
+                        </div>
+                    
+                    </div>
+                </div>
+
+            </div>
+
+            
+            <div class="row z-depth-2">
+                <div class="col s12"><p id="mensaje_validacion">MENSAJE</p></div>
+                <div class="col s12 m4 l2"><p></p></div>
+                <div class="col s12 m4 l8"><p>
+                    <div class="col s12 center"></div>
+                    <div class="input-field col s12">
+                        <input id="receptor_crc" type="text" class="validate">
+                        <label for="receptor_crc" id="receptor_label_crc">CRC</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="receptor_TX" type="text" class="validate">
+                        <label for="receptor_TX" id="receptor_label_TX">TX</label>
+                    </div>
+
+                </div>
+                <div class="col s12 m4 l2"><p></p>
+                </div>
+            
+            </div>
+        </div>
+    </div>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="js/crc.js"></script>
-    <script type="text/javascript" src="js/functions.js"></script>
+    <!-- <script type="text/javascript" src="js/functions.js"></script> -->
 </body>
 </html>
