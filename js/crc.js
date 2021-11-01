@@ -16,24 +16,19 @@ const limpiarCerosIzquierda = arrayLimpiar => {
 const verificarReceptor = (TX, G_VERIFICAR) => {
     
     let numerador = TX.split('');
-    // console.log(numerador);
     const denominador = G_VERIFICAR.split('');
-    // console.log(denominador);
     let sinTerminar = true;
     let result_receptor = new Array();
     result_receptor.push(1);
 
     let numeradorRestaReceptor = numerador.join('').substring(0,denominador.length).split('');
     numerador.join('').substring(0, denominador.length).split('');
-    console.log(numerador);
     for(let i = 0; i < denominador.length; i++) {
         numerador[i] = '';
     }
     numerador = numerador.join('').split('');
-    console.log(numerador);
     
     while(sinTerminar) {
-        // console.log(numeradorRestaReceptor);
         for(let i = 0; i < denominador.length; i++) {
 
             if(numeradorRestaReceptor[i] === denominador[i]){
@@ -44,8 +39,6 @@ const verificarReceptor = (TX, G_VERIFICAR) => {
 
         }
 
-
-    //     numerador = numerador.join('').split('');
         let arrayClean = limpiarCerosIzquierda(numeradorRestaReceptor);
         numeradorRestaReceptor = arrayClean;
         if(numerador.length === 0){
@@ -74,41 +67,32 @@ const verificarReceptor = (TX, G_VERIFICAR) => {
         if(numeradorRestaReceptor[numeradorRestaReceptor.length - 1] !== undefined) {
             // result.push(1);
         }
-    //     console.log(numeradorResta);
-    //     crc_fin = numeradorResta.join('');
-    // }
-    // console.log(crc_fin);
-
-    // if(result.join('') === '1011'){
-    //     console.log('Siiiiii! Hijueputa!!!!!');
     }
-    // console.log(result);
-    console.log(numeradorRestaReceptor);
     crc_fin = numeradorRestaReceptor.join('');
 }
 }
 
 
-const calcularCrc = (g, d, r) => {
+const calcularCrc = (G_CALCULAR_CRC, d) => {
 
-    let numerador = armarNumerador(d, r).split('');
-    const denominador = g.split('');
+    let numerador = armarNumerador(d,G_CALCULAR_CRC.join('')).split('');
     let sinTerminar = true;
-    let result = new Array();
-    result.push(1);
+    // let result = new Array();
+    // result.push(1);
 
-    let numeradorResta = numerador.join('').substring(0, denominador.length).split('');
+    let numeradorResta = numerador.join('').substring(0, G_CALCULAR_CRC.length).split('');
 
-    for(let i = 0; i < denominador.length; i++) {
+    for(let i = 0; i < G_CALCULAR_CRC.length; i++) {
         numerador[i] = '';
     }
-    crcFinal = 
     numerador = numerador.join('').split('');
+    let crcFinal = new Array();
+    let posDominadorResta = 0;
     while(sinTerminar) {
 
-        for(let i = 0; i < denominador.length; i++) {
+        for(let i = posDominadorResta; i < G_CALCULAR_CRC.length; i++) {
 
-            if(numeradorResta[i] === denominador[i]){
+            if(numeradorResta[i] === G_CALCULAR_CRC[i]){
                 numeradorResta[i] = '0';
             } else {
                 numeradorResta[i] = '1';
@@ -116,45 +100,46 @@ const calcularCrc = (g, d, r) => {
 
         }
 
-        crcFinal = numeradorResta;
-        numerador = numerador.join('').split('');
-        console.log(numeradorResta);
-        let arrayClean = limpiarCerosIzquierda(numeradorResta);
-        numeradorResta = arrayClean;
+        // crcFinal = numeradorResta;
+        // numerador = numerador.join('').split('');
+        // let arrayClean = limpiarCerosIzquierda(numeradorResta);
+        // numeradorResta = arrayClean;
+
+
+
         if(numerador.length === 0){
             sinTerminar = false;
             break;
         } else {
 
+
             numeradorResta.push(numerador[0]);
             numerador[0] = '';
             numerador = numerador.join('').split('');
             
-            while(numeradorResta.length < denominador.length){
+            while(numeradorResta.length < G_CALCULAR_CRC.length){
                 numeradorResta.push(numerador[0]); 
                 numerador[0] = '';
                 numerador = numerador.join('').split('');
-                result.push(0);
+                // result.push(0);
             }
 
-
         }
 
-        if(numeradorResta[numeradorResta.length - 1] !== undefined) {
-            result.push(1);
-        }
+        // if(numeradorResta[numeradorResta.length - 1] !== undefined) {
+        //     // result.push(1);
+        // }
 
         crc_fin = numeradorResta.join('');
 
+
+
     }
 
-    if(result.join('') === '1011'){
-        console.log('Siiiiii! Hijueputa!!!!!');
-    }
-    console.log(result);
-    console.log(' '); 
-    
-    // crc_fin = crcFinal.join('');
+    // if(result.join('') === '1011'){
+    //     console.log('Siiiiii! Hijueputa!!!!!');
+    // }
+
 }
 
 
@@ -162,7 +147,7 @@ const calcularCrc = (g, d, r) => {
 
 const armarNumerador = (primero, segundo) => { 
     let concatenar = new Array();
-    for(let i = 0; i < segundo; i++) {
+    for(let i = 0; i < segundo.length; i++) {
         concatenar[i] =  '0';
     }
     return primero + concatenar.join('');
@@ -172,7 +157,7 @@ const btn_calcular = document.getElementById('btn_calcular');
 const brn_validar = document.getElementById('enviar_validar');
 const CRC = document.getElementById('CRC_input');
 const D = document.getElementById('D_input');
-const G = document.getElementById('G_input');
+const G_input = document.getElementById('G_input');
 const R = document.getElementById('R_input');
 const TX_input = document.getElementById('TX_input');
 const CRC_label = document.getElementById('laber_crc');
@@ -183,7 +168,7 @@ TX_label.classList.add('active');
 btn_calcular.addEventListener('click', () => {
 
     enviando = false;
-    calcularCrc(G.value, D.value, R.value);
+    calcularCrc(G_input.value, D.value);
 
     CRC_label.classList.add('active');
     TX_label.classList.add('active');
@@ -201,7 +186,7 @@ const receptor_TX_label = document.getElementById('receptor_label_TX');
 
 brn_validar.addEventListener('click', () => {
 
-    verificarReceptor(TX_input.value, G.value);
+    verificarReceptor(TX_input.value, G_input.value);
     let verificar = crc_fin.split('');
     mensaje_validacion.innerHTML = 'Mensaje recibido, el mensaje está correcto';
     for(let verifica of verificar){
@@ -218,13 +203,43 @@ brn_validar.addEventListener('click', () => {
 });
 
 
-D.value = '10011110001';
-G.value = '10011';
-R.value = '4';
+// D.value = '10011110001';
+// G_input.value = '10011';
+// R.value = '4';
+D.value = '10000001110011001';
+G_input.value = '100001';
+R.value = '5';
 
 
+enviando = false;
+
+calcularCrc(G_input.value.split(''), D.value);
+
+CRC_label.classList.add('active');
+TX_label.classList.add('active');
+
+CRC.value = crc_fin;
+
+TX_input.value = D.value + crc_fin;
+console.log(crc_fin);
+if(crc_fin == '0 1 1 1'){
+    console.log('Siii');
+}
 
 
+    verificarReceptor(TX_input.value, G_input.value);
+    let verificar = crc_fin.split('');
+    mensaje_validacion.innerHTML = 'Mensaje recibido, el mensaje está correcto';
+    for(let verifica of verificar){
+        if(!(verifica == '0' || verifica == undefined)){
+            mensaje_validacion.innerHTML = 'Mensaje recibido, el mensaje está errado';
+        }
+    }
+    receptor_crc_label.classList.add('active');
+    receptor_TX_label.classList.add('active');
+
+    receptor_crc.value = crc_fin;
+    receptor_TX.value = TX_input.value;
 
 
 
