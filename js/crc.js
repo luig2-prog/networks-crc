@@ -16,9 +16,8 @@ const limpiarCerosIzquierda = arrayLimpiar => {
 const verificarReceptor = (TX, G_VERIFICAR) => {
     
     let numerador = TX.split('');
-    // console.log(numerador);
+
     const denominador = G_VERIFICAR.split('');
-    // console.log(denominador);
     let sinTerminar = true;
     let result_receptor = new Array();
     result_receptor.push(1);
@@ -180,7 +179,7 @@ TX_label.classList.add('active');
 btn_calcular.addEventListener('click', () => {
 
     enviando = false;
-    calcularCrc(G.value, D.value, R.value);
+    calcularCrc(G.value, D.value, G.value.split('').length);
 
     CRC_label.classList.add('active');
     TX_label.classList.add('active');
@@ -215,9 +214,9 @@ brn_validar.addEventListener('click', () => {
 });
 
 
-D.value = '10011110001';
-G.value = '10011';
-R.value = '4';
+// D.value = '10011110001';
+// G.value = '10011';
+// R.value = '4';
 
 
 
