@@ -24,15 +24,15 @@ const verificarReceptor = (TX, G_VERIFICAR) => {
 
     let numeradorRestaReceptor = numerador.join('').substring(0,denominador.length).split('');
     numerador.join('').substring(0, denominador.length).split('');
-    console.log(numerador);
+
     for(let i = 0; i < denominador.length; i++) {
         numerador[i] = '';
     }
     numerador = numerador.join('').split('');
-    console.log(numerador);
+
     
     while(sinTerminar) {
-        // console.log(numeradorRestaReceptor);
+
         for(let i = 0; i < denominador.length; i++) {
 
             if(numeradorRestaReceptor[i] === denominador[i]){
@@ -44,7 +44,6 @@ const verificarReceptor = (TX, G_VERIFICAR) => {
         }
 
 
-    //     numerador = numerador.join('').split('');
         let arrayClean = limpiarCerosIzquierda(numeradorRestaReceptor);
         numeradorRestaReceptor = arrayClean;
         if(numerador.length === 0){
@@ -64,25 +63,9 @@ const verificarReceptor = (TX, G_VERIFICAR) => {
                 }
 
             }
-            
 
-
-
-    //     }
-
-        if(numeradorRestaReceptor[numeradorRestaReceptor.length - 1] !== undefined) {
-            // result.push(1);
-        }
-    //     console.log(numeradorResta);
-    //     crc_fin = numeradorResta.join('');
-    // }
-    // console.log(crc_fin);
-
-    // if(result.join('') === '1011'){
-    //     console.log('Siiiiii! Hijueputa!!!!!');
     }
-    // console.log(result);
-    console.log(numeradorRestaReceptor);
+
     crc_fin = numeradorRestaReceptor.join('');
 }
 }
@@ -116,7 +99,7 @@ const calcularCrc = (g, d, r) => {
 
 
         numerador = numerador.join('').split('');
-        console.log(numeradorResta);
+
         let arrayClean = limpiarCerosIzquierda(numeradorResta);
         numeradorResta = arrayClean;
         if(numerador.length === 0){
@@ -145,12 +128,7 @@ const calcularCrc = (g, d, r) => {
         crc_fin = numeradorResta.join('');
 
     }
-
-    if(result.join('') === '1011'){
-        console.log('Siiiiii! Hijueputa!!!!!');
-    }
-    console.log(result);
-    console.log(' ');   
+ 
 }
 
 
@@ -173,16 +151,12 @@ const R = document.getElementById('R_input');
 const TX_input = document.getElementById('TX_input');
 const CRC_label = document.getElementById('laber_crc');
 const TX_label = document.getElementById('TX_label');
-CRC_label.classList.add('active');
-TX_label.classList.add('active');
 
 btn_calcular.addEventListener('click', () => {
 
     enviando = false;
     calcularCrc(G.value, D.value, G.value.split('').length);
 
-    CRC_label.classList.add('active');
-    TX_label.classList.add('active');
 
     CRC.value = crc_fin;
 
@@ -205,18 +179,14 @@ brn_validar.addEventListener('click', () => {
             mensaje_validacion.innerHTML = 'Mensaje recibido, el mensaje está errado';
         }
     }
-    receptor_crc_label.classList.add('active');
-    receptor_TX_label.classList.add('active');
+
 
     receptor_crc.value = crc_fin;
-    receptor_TX.value = TX_input.value;
+    // receptor_TX.value = TX_input.value;
 
 });
 
 
-// D.value = '10011110001';
-// G.value = '10011';
-// R.value = '4';
 
 
 
